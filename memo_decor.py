@@ -46,4 +46,6 @@ def n_choose_r(n_p, r_p):
         return 1
     if n_p == r_p:
         return 1
+    if n_p < r_p:
+        return 0
     return n_choose_r(n_p - 1, r_p - 1) + n_choose_r(n_p - 1, r_p)
