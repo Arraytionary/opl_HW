@@ -1,7 +1,14 @@
-"""this is for encounter missing-docstring in pylint"""
-
+"""
+stitcher module
+"""
 def stitch_files(*args):
-    """this is for encounter missing-function docstring in pylint"""
+    """
+    Args:
+        *args (str): path to the file
+
+    Yields:
+        str:  The text from each line from each file
+    """
     for i in args:
         if not isinstance(i, str):
             raise ValueError("invalid type of input, expect str (%s were given)" %type(i))

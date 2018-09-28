@@ -1,14 +1,25 @@
-"""this is for encounter missing-docstring in pylint"""
+"""
+alternate module
+"""
 
 def iter_alternate(iter1, iter2):
-    """this is for encounter missing-function docstring in pylint"""
+    """
+    Args:
+        iter_1 (iterator): first parameter
+        iter_2 (iterator): second parameter
+
+    Yields:
+        (some type depends on the iterator): alternate between iter_1 and iter_2
+    """
+    i_2_end = True
     i_2 = iter2
     for elm in iter1:
         yield elm
-        temp = next(i_2, None)
-        if temp:
+        try:
+            temp = next(i_2)
+        except StopIteration:
+            i_2_end = False
+        if i_2_end:
             yield temp
-    i2_leftover = next(i_2, None)
-    while i2_leftover:
-        yield i2_leftover
-        i2_leftover = next(i_2, None)
+    for elm in i_2:
+        yield elm

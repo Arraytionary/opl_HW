@@ -1,7 +1,15 @@
-"""this is for encounter missing-docstring in pylint"""
+"""
+permutation module
+"""
 
 def all_perms(input_number):
-    """this is for encounter missing-function docstring in pylint"""
+    """
+    Args:
+        input_number (int): An integer input_number > 0 
+
+    Yileds:
+        tuple: permutation of number 1, 2, ..., input_number
+    """
     if input_number == 1:
         yield (1, )
     else:

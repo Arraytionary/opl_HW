@@ -1,35 +1,49 @@
-# @memoized
-def memoize_fib(n):
+"""
+memo_decore module
+"""
+
+def memoized(func):
+    """
+        Args:
+            func (function): function that need to be memoized
+
+        Returns:
+            function: Function that able to memoized
+    """
     mem = {}
-    def memo_fib(x):
-        if x not in mem: 
-            mem[x] = n(x)    
-        return mem[x]
-    return memo_fib
+    def memo(*args):
+        if args not in mem:
+            mem[args] = func(*args)
+        return mem[args]
+    return memo
 
-def fib(n):
-    if n == 0 or n == 1:
+@memoized
+def fib(num):
+    """
+        Args:
+            num (int): index of fibonacci
+
+        Returns:
+            int: value of fibonacci at num position
+    """
+    if num == 0:
+        return 0
+    if num in (1, 2):
         return 1
-    else:
-        return fib(n-1) + fib(n-2)
+    return fib(num - 1) + fib(num - 2)
 
-fib = memoize_fib(fib)
+@memoized
+def n_choose_r(n_p, r_p):
+    """
+        Args:
+            n_p (int): Amount of number to choose from
+            r_p (int): Amount of number to choose
 
-def memoize_ncr(n):
-    mem = {}
-    def memo_ncr(x, r):
-        if (x,r) not in mem: 
-            mem[(x,r)] = n(x,r)    
-        return mem[(x,r)]
-    return memo_ncr
-
-
-def n_choose_r(n, r):
-    if r is 0:
+        Returns:
+            int: Number of ways to choose
+    """
+    if r_p == 0:
         return 1
-    elif n is r:
+    if n_p == r_p:
         return 1
-    else:
-        return n_choose_r(n - 1, r - 1) + n_choose_r(n - 1, r)
-
-n_choose_r = memoize_ncr(n_choose_r)
+    return n_choose_r(n_p - 1, r_p - 1) + n_choose_r(n_p - 1, r_p)
